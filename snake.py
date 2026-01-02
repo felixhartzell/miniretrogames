@@ -4,6 +4,8 @@
 import sys
 import time
 import random
+from operator import index
+
 import readchar
 import threading
 
@@ -124,6 +126,16 @@ def apple_eaten_check():
             apple_cords = []
             apple_has_been_eaten = 1
 
+def self_collision_check():
+    global snake_cords
+    for i in snake_cords:
+        count = 0
+        for j in snake_cords:
+            if i == j:
+                count += 1
+            if count == 2:
+                end_game()
+
 def end_game():
     print("You Lost!")
     time.sleep(1)
@@ -145,4 +157,5 @@ while True:
     if exists_apple == 0:
         exists_apple = 1
         create_apple()
+    self_collision_check()
     print_grid()
