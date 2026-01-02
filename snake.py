@@ -18,14 +18,14 @@ def input_handling():
     global direction
     while True:
         key = readchar.readkey()
-        if key == "n" or "s" or "w" or "e":
+        if key == "w" or "s" or "a" or "d":
             direction = key
         time.sleep(0.1)
 
 # Create main 15x17 gamegrid
 def create_grid():
     global map_grid
-    map_grid = [['0'] * 17 for _ in range(15)]
+    map_grid = [['□'] * 17 for _ in range(15)]
 
 # Define initial snake
 def create_snake():
@@ -44,7 +44,7 @@ def print_grid():
         print(i)
     for i in map_grid:
         for j in range(17):
-            i[j] = "0"
+            i[j] = "□"
 
 def move_snake():
     global snake_cords
@@ -52,7 +52,7 @@ def move_snake():
     index = 1
     if apple_has_been_eaten:
         snake_tail = snake_cords[len(snake_cords) - 1].copy()
-    if direction == "n":
+    if direction == "w":
         for i in snake_cords:
             if index == len(snake_cords):
                 snake_cords[0][1] -= 1
@@ -68,7 +68,7 @@ def move_snake():
             snake_cords[len(snake_cords) - index][0] = snake_cords[len(snake_cords) - index - 1][0]
             snake_cords[len(snake_cords) - index][1] = snake_cords[len(snake_cords) - index - 1][1]
             index += 1
-    elif direction == "e":
+    elif direction == "d":
         for i in snake_cords:
             if index == len(snake_cords):
                 snake_cords[0][0] += 1
@@ -76,7 +76,7 @@ def move_snake():
             snake_cords[len(snake_cords) - index][0] = snake_cords[len(snake_cords) - index - 1][0]
             snake_cords[len(snake_cords) - index][1] = snake_cords[len(snake_cords) - index - 1][1]
             index += 1
-    elif direction == "w":
+    elif direction == "a":
         for i in snake_cords:
             if index == len(snake_cords):
                 snake_cords[0][0] -= 1
