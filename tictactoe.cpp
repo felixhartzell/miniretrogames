@@ -1,12 +1,11 @@
 #include <iostream>
 #include <map>
 #include <string>
-#include <bits/stdc++.h>
 
 using namespace std;
 
 // initialize grid
-char grid[3][3] = {{0,0,0},{0,0,0},{0,0,0}};
+char grid[3][3] = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
 
 // possible win conditions
 int win_conditions[8][3][2] = {
@@ -51,38 +50,16 @@ void place_thing() {
         }
         cout << "\n";
     }
-    int check_x;
-    int check_y;
-    int win_check = 0;
     for (int i = 0; i < 8; i++) {
+        int win_check = 0;
         for (int j = 0; j < 3; j++) {
-            check_x = win_conditions[i][j][0];
-            check_y = win_conditions[i][j][1];
-            if (grid[check_x][check_y] == 'X') {
+            int check_x = win_conditions[i][j][0];
+            int check_y = win_conditions[i][j][1];
+            if (grid[check_x][check_y] == current_player) {
                 win_check++;
             }
-            else {
-                win_check = 0;
-            }
-            if (win_check == 3) {
-                end_game();
-            }
-            }
         }
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 3; j++) {
-            check_x = win_conditions[i][j][0];
-            check_y = win_conditions[i][j][1];
-            if (grid[check_x][check_y] == 'O') {
-                win_check++;
-            }
-            else {
-                win_check = 0;
-            }
-            if (win_check == 3) {
-                end_game();
-            }
-        }
+        if (win_check == 3) end_game();
     }
     if (current_player == 'X') {
         current_player = 'O';
