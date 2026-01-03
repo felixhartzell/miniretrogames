@@ -2,19 +2,20 @@
 
 # Import statements
 import sys
-import time
-import random
-from operator import index
-
-import readchar
 import threading
+import time
+import readchar
+import random
 
 apple_cords = []
 exists_apple = 0
 apple_x = 0
 apple_y = 0
 apple_has_been_eaten = 0
-direction = 0
+direction = "n"
+
+# The time it sleeps for each "frame"
+frame_interval = 1
 
 def input_handling():
     global direction
@@ -49,7 +50,7 @@ def print_grid():
             i[j] = "□"
 
 def move_snake():
-    global snake_cords
+    global snake_cords, snake_tail
     global apple_has_been_eaten
     index = 1
     if apple_has_been_eaten:
@@ -100,7 +101,7 @@ def move_snake():
         elif i[0] > 16:
             end_game()
 def create_apple():
-    global apple_cords
+    global apple_cords, apple_x, apple_y
     global snake_cords
     apple_cords = []
     apple_true = 0
@@ -151,7 +152,7 @@ thread0.daemon = True
 thread0.start()
 
 while True:
-    time.sleep(1)
+    time.sleep(frame_interval)
     move_snake()
     apple_eaten_check()
     if exists_apple == 0:
